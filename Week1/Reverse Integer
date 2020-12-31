@@ -1,0 +1,24 @@
+class Solution(object):
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        negative=True
+        if(x<0):
+            negative=False
+            x=x*(-1)
+        result=0
+        while(x>0):
+            remainder=x%10
+            x=x//10
+            if (result > (math.pow(2,31)-1)/10 or (result == (math.pow(2,31)-1) / 10 and remainder > 7)):
+                return 0
+            if (result < ((-1)*math.pow(2,31))/10 or (result == ((-1)*math.pow(2,31)) / 10 and remainder < -8)):
+                return 0
+            result=(result*10) + remainder
+
+        if(negative==False):
+            return result*(-1)
+        else:
+            return result
