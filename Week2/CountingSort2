@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the countingSort function below.
+def countingSort(arr):
+    #finding the maximum array size
+    max1=0
+    l=[]
+    ans= []
+    for i in range(len(arr)):
+        if max1<arr[i]:
+            max1=arr[i]
+    #creating an array with size max1
+    for i in range(max1+1):
+        l.append(0)
+    #counting occurence of each number
+    for i in range(len(arr)):
+        l[arr[i]]+=1
+    #printing the result
+    for i in range(len(l)):
+        for j in range(l[i]):
+            ans.append(i)
+    return ans
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = countingSort(arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
