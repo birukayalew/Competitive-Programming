@@ -1,0 +1,23 @@
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        d={}
+        ans=[]
+        arr1.sort()
+        for i in range(len(arr1)):
+            if arr1[i] in d:
+                d[arr1[i]]+=1
+            else:
+                d[arr1[i]]=1
+        for i in range(len(arr2)):
+            curr=arr2[i]
+            for j in range(d[curr]):
+                ans.append(curr)
+            d[curr]=0
+        for key in d:
+            if d[key]!=0:
+                for j in range(d[key]):
+                    ans.append(key)
+        return ans
+        
+                
+        
