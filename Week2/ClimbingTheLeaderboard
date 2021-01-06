@@ -1,0 +1,61 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'climbingLeaderboard' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY ranked
+#  2. INTEGER_ARRAY player
+#
+
+def climbingLeaderboard(ranked, player):
+    # Write your code here
+    d={}
+    index=1
+    answer=[]
+    checkerRanked=len(ranked)-1
+    for i in range(len(ranked)):
+        if ranked[i] not in d:
+            d[ranked[i]]=index
+            index+=1
+    for i in range(len(player)):
+        curr=player[i]
+        while checkerRanked>=0:
+            if curr<ranked[checkerRanked]:
+                answer.append(d[ranked[checkerRanked]]+1)
+                break
+            elif curr==ranked[checkerRanked]:
+                answer.append(d[ranked[checkerRanked]])
+                break
+            else:
+                checkerRanked-=1 
+        if checkerRanked==-1:
+            answer.append(1)
+    return answer
+    
+        
+            
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    ranked_count = int(input().strip())
+
+    ranked = list(map(int, input().rstrip().split()))
+
+    player_count = int(input().strip())
+
+    player = list(map(int, input().rstrip().split()))
+
+    result = climbingLeaderboard(ranked, player)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
