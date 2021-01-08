@@ -1,0 +1,11 @@
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        distance=[]
+        ans=[]
+        for i in range(len(points)):
+            distance.append([i,(points[i][0]*points[i][0])+(points[i][1]*points[i][1])])
+        distance.sort(key=lambda d:d[1])
+        for i in range(K):
+            ans.append(points[distance[i][0]])
+        return ans
+                    
