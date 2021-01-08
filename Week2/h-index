@@ -1,0 +1,17 @@
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        citations.sort()
+        count=0
+        for i in range(len(citations)-1,-1,-1):
+            if count+1>=citations[i]:
+                if count+1==citations[i]:
+                    return citations[i]
+                else:
+                    return count
+            count+=1
+        if len(citations)==1:
+            return 1
+        elif len(citations)==0:
+            return 0
+        else:
+            return len(citations)
