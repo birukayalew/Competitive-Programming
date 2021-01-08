@@ -1,0 +1,18 @@
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        iterator=0
+        check=0
+        while iterator<(len(nums)-1):
+            if nums[iterator]>nums[iterator+1]:
+                if (iterator!=0 and iterator!=(len(nums)-2)) and (nums[iterator-1]>nums[iterator+1]):
+                    if (nums[iterator]>nums[iterator+2]):
+                        return False
+                check+=1
+                if check>1:
+                    return False
+            iterator+=1
+
+        return True
+                    
+                
+            
