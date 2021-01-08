@@ -1,0 +1,17 @@
+import math
+class Solution:
+    def allCellsDistOrder(self, R: int, C: int, r0: int, c0: int) -> List[List[int]]:
+        store=[]
+        distance=[]
+        index=0
+        ans=[]
+        for i in range(R):
+            for j in range(C):
+                store.append([i,j])
+                distance.append([index,int(math.fabs(i-r0)+math.fabs(j-c0))])
+                index+=1
+        distance.sort(key=lambda d:d[1])
+        for i in range(len(store)):
+            ans.append(store[distance[i][0]])
+        return ans
+                
