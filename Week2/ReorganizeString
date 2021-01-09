@@ -1,0 +1,34 @@
+class Solution:
+    def reorganizeString(self, S: str) -> str:
+        d={}
+        index=0
+        answer=[]
+        TheMostCommon=[]
+        #appending value and its number of repetition to a dictionary
+        for i in range(len(S)):
+            if S[i] in d:
+                d[S[i]]+=1
+            else:
+                d[S[i]]=1
+        #appending values and number of repetitions, and then sorting 
+        for key in d:
+            TheMostCommon.append([key,d[key]])
+        TheMostCommon.sort(key=lambda d:d[1])
+        #distributing letters based on their repetition priority
+        answer=[[] for x in range(TheMostCommon[len(TheMostCommon)-1][1])]
+        for i in range(len(TheMostCommon)-1,-1,-1):
+            for j in range(TheMostCommon[i][1]):
+                if index>=TheMostCommon[len(TheMostCommon)-1][1]:
+                    index=0
+                answer[index].append(TheMostCommon[i][0])
+                index+=1
+        #concatinating dispersed lists
+        for i in range(1,len(answer)):
+            answer[0].extend(answer[i])
+        #checking if there is no similar adjacent letters and concatinating each letters
+        for i in range(len(answer[0])-1):
+            if answer[0][i]==answer[0][i+1]:
+                return ""
+            else:
+                answer[0][0]=answer[0][0]+answer[0][i+1]
+        return answer[0][0]
