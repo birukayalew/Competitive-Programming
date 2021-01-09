@@ -1,0 +1,18 @@
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        LeftPointer=MiddlePointer=0
+        RightPointer=len(nums)-1
+        while(MiddlePointer<=RightPointer):
+            if nums[MiddlePointer]==0:
+                nums[LeftPointer],nums[MiddlePointer]=nums[MiddlePointer],nums[LeftPointer]
+                LeftPointer+=1
+                MiddlePointer+=1
+            elif nums[MiddlePointer]==2:
+                nums[RightPointer],nums[MiddlePointer]=nums[MiddlePointer],nums[RightPointer]
+                RightPointer-=1
+            else:
+                MiddlePointer+=1
+        
