@@ -1,0 +1,20 @@
+# Complete the findMergeNode function below.
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+def findMergeNode(head1, head2):
+    d={}
+    while head1.next!=None:
+        d[head1.next]=head1
+        head1=head1.next
+    while head2.next!=None:
+        if head2.next in d:
+            return head2.next.data
+        head2=head2.next
+    return head1.data
