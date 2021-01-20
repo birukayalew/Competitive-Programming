@@ -1,0 +1,29 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def nextLargerNodes(self, head: ListNode) -> List[int]:
+        arr=[]
+        stack=[]
+        while head:
+            arr.append(head.val)
+            head=head.next
+        for i in range(len(arr)):
+            if len(stack)==0:
+                stack.append([arr[i],i])
+            else:
+                if arr[i]>stack[-1][0]:
+                    while stack and arr[i]>stack[-1][0]:
+                        arr[stack[-1][1]]=arr[i]
+                        stack.pop()
+                
+                stack.append([arr[i],i])
+        while len(stack)>0:
+            arr[stack[-1][1]]=0
+            stack.pop()
+        return arr
+        
+        
+        
