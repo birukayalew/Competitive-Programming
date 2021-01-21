@@ -1,0 +1,16 @@
+class Solution:
+    def removeDuplicates(self, S: str) -> str:
+        stack=[]
+        ans=""
+        for letter in S:
+            if len(stack)==0:
+                stack.append(letter)
+            else:
+                if stack[-1]==letter:
+                    stack.pop()
+                else:
+                    stack.append(letter)
+        for letter in stack:
+            ans+=letter
+        return ans
+            
