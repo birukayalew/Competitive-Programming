@@ -19,7 +19,7 @@ def insert(word,index,trie,is_prefix):
         
     if index == len(word):
         trie.end = True
-        for key in trie.children: #if prefix comes after its parent(a string holds the prefix) is added to the trie
+        if len(trie.children) > 0: #if prefix comes after its parent(a string holds the prefix) is added to the trie
             return True
         return is_prefix
     
