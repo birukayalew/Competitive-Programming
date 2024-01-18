@@ -1,19 +1,16 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        next_greater = {}
-        stack = []
-        n2_len = len(nums2)
+        next_greater_map = {}  # Dictionary to store next greater elements
+        stack = []  # Monotonic stack (stores elements in descending order)
 
-        # Find next greater elements for all elements in nums2
-        for i in range(n2_len - 1, -1, -1):
-            while stack and stack[-1] <= nums2[i]:
-                stack.pop()
-            next_greater[nums2[i]] = stack[-1] if stack else -1
-            stack.append(nums2[i])
+        for num in nums2:
+            while stack and num > stack[-1]:
+                next_greater_map[stack.pop()] = num  # Update dictionary with next greater
+            stack.append(num)
 
-        # Build the result array
-        ans = []
-        for x in nums1:
-            j = nums2.index(x)
-            ans.append(next_greater[nums2[j]])
-        return ans
+        while stack:
+            next_greater_map[stack.pop()] = -1
+
+        result = [next_greater_map[x] for x in nums1]  
+
+        return result
