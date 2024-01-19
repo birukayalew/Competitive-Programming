@@ -1,24 +1,29 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        low = 0
-        high = len(nums) - 1
+        if len(nums) == 0:  # Handle empty array
+            return None  
 
-        while low <= high:
-            mid = low + (high - low) // 2
+        left = 0
+        right = len(nums) - 1
 
-            # Case 1: Array is not rotated, minimum is at the start
-            if nums[low] <= nums[high]:
-                return nums[low]
+        # Base case: If already sorted (no rotation)
+        if nums[left] <= nums[right]:  
+            return nums[left] 
 
-            # Case 2: Mid element is the minimum
-            if nums[mid] < nums[mid - 1]:
-                return nums[mid]
+        while left <= right:
+            mid = left + (right - left) // 2
 
-            # Case 3: Minimum lies on the right side
-            if nums[mid] > nums[high]:
-                low = mid + 1
-            # Case 4: Minimum lies on the left side
-            else:
-                high = mid - 1
+            # Check if mid itself is the minimum element
+            if nums[mid] > nums[mid + 1]:  
+                return nums[mid + 1]
 
-        return -1
+            # Check if mid is in the right sorted portion (unrotated part)
+            if nums[mid] < nums[left]: 
+                # Minimum lies in the left half 
+                right = mid - 1
+
+            else:  # Mid lies in the left sorted portion
+                # Minimum lies in the right half 
+                left = mid + 1
+
+        return None 
