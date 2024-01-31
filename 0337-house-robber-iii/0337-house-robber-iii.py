@@ -7,26 +7,22 @@
 class Solution:
     def rob(self, root: Optional[TreeNode]) -> int:
 
-        def rob_tree_helper(root):
-            # Returns a tuple (rob_root, not_rob_root)
-            # rob_root: maximum money if this root is robbed
-            # not_rob_root: maximum money if this root is not robbed
+        def helper(node):
+            # Base case: empty node
+            if not node:
+                return (0, 0)  # rob: 0, not_rob: 0
 
-            if not root:
-                return (0, 0)
+            left = helper(node.left)
+            right = helper(node.right)
 
-            left = rob_tree_helper(root.left)
-            right = rob_tree_helper(root.right)
+            # If you rob the current node
+            rob = node.val + left[1] + right[1]  
+            # If you don't rob the current node
+            not_rob = max(left) + max(right)     
 
-            # If we rob this root, we cannot rob its children
-            rob_root = root.val + left[1] + right[1]
-
-            # If we don't rob this root, we can choose whether to rob its children
-            not_rob_root = max(left) + max(right)
-
-            return (rob_root, not_rob_root)
+            return (rob, not_rob)
         
-        result = rob_tree_helper(root)
-        return max(result)
+        
+        return max(helper(root))
 
       
